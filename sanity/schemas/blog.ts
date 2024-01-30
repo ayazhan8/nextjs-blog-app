@@ -35,6 +35,17 @@ export default {
                     type: 'block',
                 }
             ]
+        },
+        {
+            name: 'isFeatured',
+            type: 'boolean',
+            title: 'Is Featued'
+        },
+        {
+            name: 'priority',
+            type: 'number',
+            title: 'Priority',
+            validation: (Rule: any) => Rule.integer().positive()
         }
     ]
 }
