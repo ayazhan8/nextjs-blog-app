@@ -3,6 +3,10 @@ export interface simpleBlogCard {
     smallDescription: string;
     currentSlug: string;
     titleImage: any;
+    date: string;
+    category: {
+        name: string
+    };
 }
 
 export interface fullBlog {
@@ -10,4 +14,8 @@ export interface fullBlog {
     title: string;
     content: any;
     titleImage: any;
+}
+
+export interface Category {
+    name: string;
 }

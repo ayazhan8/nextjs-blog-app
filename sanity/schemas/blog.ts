@@ -46,6 +46,20 @@ export default {
             type: 'number',
             title: 'Priority',
             validation: (Rule: any) => Rule.integer().positive()
+        },
+        {
+            name: 'date',
+            type: 'datetime',
+            title: 'Date',
+            options: {
+                dateFormat: 'YYYY-MM-DD',
+            }
+        },
+        {
+            name: 'category',
+            type: 'reference',
+            title: 'Category',
+            to: [{ type: 'category'}]
         }
     ]
 }
