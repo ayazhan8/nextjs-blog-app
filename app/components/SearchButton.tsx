@@ -4,7 +4,7 @@ import React from 'react'
 
 function SearchButton() {
   return (
-    <Button variant="ghost" size="sm">
+    <Button variant="ghost" size="icon">
         <Search />
     </Button>
   )
