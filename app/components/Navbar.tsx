@@ -14,9 +14,9 @@ export default function Navbar() {
 
   const routes = [
     {
-      href: `/home`,
+      href: `/`,
       label: "Home",
-      active: pathname === `/home`,
+      active: pathname === `/`,
     },
     {
       href: `/about`,
