@@ -13,14 +13,14 @@ function Home({
   const per_page = searchParams['per_page'] ?? '2';
 
   return (
-    <div className="flex justify-center mx-4 my-8 gap-8 flex-col sm:flex-row">
-      <div className="flex-1">
+    <div className="flex mx-4 my-8 gap-8 flex-col lg:flex-row sm:mx-8">
+      <div className="lg:w-3/4">
         <FeaturedPosts />
         <RecentPosts page={page} perPage={per_page}/>
       </div>
-      <div className="mx-12 flex-shrink-0 max-w-xs">
-        <SupportBlock />
+      <div className="lg:w-1/4">
         <Categories />
+        <SupportBlock />
       </div>
     </div>
   );

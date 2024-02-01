@@ -28,7 +28,7 @@ export default async function Categories() {
     return (
         <>
             <h2 className="font-bold text-2xl my-3">Categories</h2>
-            <div className="mt-8">
+            <div className="">
                 {categories.map((category, idx) => (
                     <Badge variant="outline" className={`${getRandomColor()} mx-2 my-1 px-3 py-2 border-none`}>
                         <Link href={`/categories/${category.name.toLowerCase()}`} key={idx} className={`font-normal text-base dark:text-black`}>{category.name}</Link>
