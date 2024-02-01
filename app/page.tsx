@@ -1,49 +1,29 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { simpleBlogCard } from "./lib/interface";
-import { client, urlFor } from "./lib/sanity";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import React from "react";
+import FeaturedPosts from "./components/FeaturedPosts";
+import Categories from "./components/Categories";
+import RecentPosts from "./components/RecentPosts";
+import SupportBlock from "./components/SupportBlock";
 
-async function getData() {
-  const query = `
-    *[_type == 'blog'] {
-      title,
-      smallDescription,
-      titleImage,
-      "currentSlug": slug.current
-    }`; 
-
-  const data = await client.fetch(query);
-
-  return data;
-}
-
-export default async function Home() {
-  const data: simpleBlogCard[] = await getData();
+function Home({
+  searchParams
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  const page = searchParams['page'] ?? '1';
+  const per_page = searchParams['per_page'] ?? '2';
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-5">
-      {data.map((post, idx) => (
-        <Card key={idx}>
-          <Image 
-            src={urlFor(post.titleImage).url()} 
-            alt="image" 
-            width={500} 
-            height={500} 
-            className="rounded-t-lg h-[200px] object-cover"
-            />
-          <CardContent className="mt-5">
-            <h3 className="text-lg line-clamp-2 font-bold">{post.title}</h3>
-            <p className="line-clamp-3 text-sm mt-2 text-gray-600 dark:text-gray-300">{post.smallDescription}</p>
-            <Button asChild className="w-full mt-7">
-              <Link href={`/blog/${post.currentSlug}`}>
-                Read More
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
+    <div className="flex justify-center mx-4 my-8 gap-8 flex-col sm:flex-row">
+      <div className="flex-1">
+        <FeaturedPosts />
+        <RecentPosts page={page} perPage={per_page}/>
+      </div>
+      <div className="mx-12 flex-shrink-0 max-w-xs">
+        <SupportBlock />
+        <Categories />
+      </div>
     </div>
   );
 }
+
+export default Home;
