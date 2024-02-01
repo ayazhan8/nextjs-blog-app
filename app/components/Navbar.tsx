@@ -64,7 +64,7 @@ export default function Navbar() {
             <SearchButton />
             <Button
               variant="ghost"
-              size="sm"
+              size="icon"
               onClick={() => {
                 setOpen(true);
               }}
@@ -76,10 +76,10 @@ export default function Navbar() {
         </div>
 
         {open && (
-          <div className="absolute top-0 left-0 w-full h-screen flex flex-col justify-between items-center p-8 bg-popover">
+          <div className="absolute top-0 left-0 w-full h-screen flex flex-col justify-between items-center py-5 px-11 bg-popover">
             <Button
               variant="ghost"
-              size="sm"
+              size="icon"
               className="ml-auto"
               onClick={() => {
                 setOpen(false);
@@ -91,10 +91,11 @@ export default function Navbar() {
               {routes.map((route, idx) => (
                 <Link
                   key={idx}
+                  onClick={() => setOpen(false)}
                   href={route.href}
-                  className={`px-3 py-2 font-semibold ${
-                    route.active ? "text-primary" : ""
-                  }`}
+                  className={`my-3 font-semibold text-2xl
+                  ${route.active ? "text-primary" : ""}
+                  `}
                 >
                   {route.label}
                 </Link>
