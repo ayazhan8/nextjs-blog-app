@@ -46,11 +46,12 @@ export default function Navbar() {
 
         <div className="flex flex-row gap-4 lg:gap-8">
           <div className="hidden sm:flex sm:items-center sm:justify-between lg:gap-8">
-            {routes.map((route) => (
+            {routes.map((route, idx) => (
               <Link
+                key={idx}
                 href={route.href}
                 className={`px-3 py-2 font-semibold text-sm md:text-base ${
-                  route.active && "text-blue-500"
+                  route.active ? "text-blue-500" : ""
                 }`}
               >
                 {route.label}
@@ -87,8 +88,9 @@ export default function Navbar() {
               <X />
             </Button>
             <div className="flex flex-col items-center justify-between">
-              {routes.map((route) => (
+              {routes.map((route, idx) => (
                 <Link
+                  key={idx}
                   href={route.href}
                   className={`px-3 py-2 font-semibold ${
                     route.active ? "text-primary" : ""
