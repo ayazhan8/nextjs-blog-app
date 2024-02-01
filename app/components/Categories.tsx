@@ -27,7 +27,7 @@ export default async function Categories() {
 
     return (
         <>
-            <h2 className="font-bold text-2xl my-3">Categories</h2>
+            <h2 className="font-bold text-2xl my-3 ml-2">Categories</h2>
             <div className="">
                 {categories.map((category, idx) => (
                     <Badge variant="outline" className={`${getRandomColor()} mx-2 my-1 px-3 py-2 border-none`}>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import PaginationControls from "./PaginationControls";
+import { Badge } from "@/components/ui/badge";
 
 export const revalidate = 30;
 
@@ -39,11 +40,11 @@ export default async function RecentPosts({
 
   return (
     <>
-      <h2 className="font-bold text-2xl my-3">Recent Posts</h2>
+      <h2 className="font-bold text-xl md:text-2xl">Recent Posts</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {entries.map((post, idx) => (
-          <Card key={idx} className="flex flex-col my-8">
+          <Card key={idx} className="flex flex-col my-4">
             <Image
               src={urlFor(post.titleImage).url()}
               alt="image"
@@ -51,11 +52,15 @@ export default async function RecentPosts({
               height={300}
               className="rounded-t-lg w-full h-60 object-cover"
             />
+            
             <CardContent className="mt-5">
-              <span>
-                {post.date.slice(0, 10)} - {post.category?.name}{" "}
-              </span>
-              <h3 className="text-lg line-clamp-2 font-bold">{post.title}</h3>
+              <div className="flex items-center">
+                <span className="flex items-center">
+                  {post.date.slice(0, 10)}
+                </span>
+                <Badge className="ml-2 text-center">{post.category?.name}</Badge>
+              </div>
+              <h3 className="text-lg line-clamp-2 font-bold mt-2">{post.title}</h3>
               <p className="line-clamp-3 text-sm mt-2 text-gray-600 dark:text-gray-300">
                 {post.smallDescription}
               </p>

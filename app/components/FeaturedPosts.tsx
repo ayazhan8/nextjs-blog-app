@@ -31,7 +31,7 @@ export default async function FeaturedPosts() {
 
   return (
     <>
-      <h2 className="font-bold text-lg sm:text-xl md:text-2xl my-3">Featured Posts</h2>
+      <h2 className="font-bold text-xl md:text-2xl my-3">Featured Posts</h2>
 
       <div className="">
         {data.map((post, idx) => (
@@ -42,17 +42,19 @@ export default async function FeaturedPosts() {
               alt="image"
               width={512}
               height={384}
-              className="object-cover w-full h-auto p-4 max-h-[256px]"
+              className="object-cover w-full md:w-1/2 h-auto p-4 max-h-[384px]"
             />
 
             <CardContent className="p-4">
 
-              <p className="flex items-center">
-                {post.date.slice(0, 10)}
-                <Badge className="ml-2">{post.category.name}</Badge>
-              </p>
-              
-              <h3 className="text-lg line-clamp-2 font-bold">{post.title}</h3>
+              <div className="flex items-center">
+                <span className="flex items-center">
+                  {post.date.slice(0, 10)}
+                </span>
+                <Badge className="ml-2 text-center">{post.category.name}</Badge>
+              </div>
+
+              <h3 className="text-lg line-clamp-2 font-bold mt-2">{post.title}</h3>
               <p className="line-clamp-3 text-sm mt-2 text-gray-600 dark:text-gray-300">
                 {post.smallDescription}
               </p>

@@ -23,7 +23,7 @@ const PaginationControls: FC<PaginationControlsProps> = (
   const per_page = searchParams.get('per_page') ?? '2'
 
   return (
-    <div className='flex gap-2'>
+    <div className='flex gap-2 justify-end'>
       <Button
         disabled={!hasPrevPage}
         onClick={() => {
