@@ -2,14 +2,21 @@
 
 import { ModeToggle } from "@/components/ModeToggle";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import SearchButton from "./SearchButton";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, Search, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { client } from "../lib/sanity";
+import { fullBlog } from "../lib/interface";
+import { groq } from "next-sanity";
+import axios from "axios";
 
 export default function Navbar() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [isSearching, setSearching] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const pathname = usePathname();
 
   const routes = [
@@ -34,6 +41,39 @@ export default function Navbar() {
       active: pathname === `/contact`,
     },
   ];
+
+  const divRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (divRef.current && !divRef.current.contains(event.target as Node)) {
+        setSearching(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const searchFilter = `&& name match "${searchText}"`;
+
+    // const searchResults = await client.fetch<fullBlog[]>(
+    //   groq`*[_type == "blog"] {
+    //     title
+    //   }`
+    // );
+    const searchResults = await axios.get(`/api/search?filter=${searchText}`);
+    console.log(searchResults);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+  };
 
   return (
     <div className="border-b-2">
@@ -60,18 +100,41 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center justify-between">
-            <ModeToggle />
-            <SearchButton />
-            <Button
-              variant="ghost"
-              size="icon"
+            {!isSearching && <ModeToggle />}
+
+            <form
+              action="submit"
+              className="relative w-max mx-auto"
               onClick={() => {
-                setOpen(true);
+                setSearching(true);
               }}
-              className="sm:hidden"
+              ref={divRef}
+              onSubmit={handleSubmit}
             >
-              <Menu />
-            </Button>
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={handleChange}
+                className="relative peer z-10 bg-transparent w-12 h-12 focus:rounded-full focus:border 
+                            focus:w-full focus:border-blue-300 cursor-pointer outline-none focus:cursor-text
+                            pl-8 "
+              />
+              <Search className="absolute inset-y-0 right-0 my-auto h-8 w-12 px-3.5 border-l border-transparent peer-focus:border-blue-300 peer-focus:stroke-blue-300" />
+            </form>
+
+            {!isSearching && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  setOpen(true);
+                }}
+                className="sm:hidden"
+              >
+                <Menu />
+              </Button>
+            )}
           </div>
         </div>
 
