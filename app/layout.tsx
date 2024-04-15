@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./components/theme-provider";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,7 +26,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="max-w-7xl mx-auto px-4">{children}</main>
+          <main className="max-w-7xl mx-auto px-4 h-full">{children}</main>
         </ThemeProvider>
       </body>
     </html>
