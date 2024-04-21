@@ -2,18 +2,16 @@
 
 import { ModeToggle } from "@/components/ModeToggle";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import SearchButton from "./SearchButton";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { client } from "../lib/sanity";
-import { fullBlog } from "../lib/interface";
-import { groq } from "next-sanity";
 import axios from "axios";
+import { useModalsContext } from "@/context/modals-context";
 
 export default function Navbar() {
-  const router = useRouter();
+  const { activeModal, setActiveModal } = useModalsContext();
+
   const [open, setOpen] = useState(false);
   const [isSearching, setSearching] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -34,11 +32,6 @@ export default function Navbar() {
       href: `/categories`,
       label: "Categories",
       active: pathname === `/categories`,
-    },
-    {
-      href: `/contact`,
-      label: "Contact",
-      active: pathname === `/contact`,
     },
   ];
 
@@ -127,46 +120,16 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => {
-                  setOpen(true);
-                }}
                 className="sm:hidden"
+                onClick={() => {
+                  setActiveModal("mobive-nav");
+                }}
               >
                 <Menu />
               </Button>
             )}
           </div>
         </div>
-
-        {open && (
-          <div className="absolute top-0 left-0 w-full h-screen flex flex-col justify-between items-center py-5 px-11 bg-popover">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="ml-auto"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <X />
-            </Button>
-            <div className="flex flex-col items-center justify-between">
-              {routes.map((route, idx) => (
-                <Link
-                  key={idx}
-                  onClick={() => setOpen(false)}
-                  href={route.href}
-                  className={`my-3 font-semibold text-2xl
-                  ${route.active ? "text-primary" : ""}
-                  `}
-                >
-                  {route.label}
-                </Link>
-              ))}
-            </div>
-            <div></div>
-          </div>
-        )}
       </nav>
     </div>
   );

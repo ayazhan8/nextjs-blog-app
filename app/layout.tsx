@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./components/theme-provider";
+import { ModalsProvider } from "@/context/modals-context";
+import Modal from "./components/Modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,15 +20,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col h-full`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <main className="max-w-7xl mx-auto px-4 h-full">{children}</main>
+          <ModalsProvider>
+            <Navbar />
+            <main className="flex-grow">
+              <div className="max-w-7xl mx-auto px-4">{children}</div>
+            </main>
+
+            <Modal />
+          </ModalsProvider>
         </ThemeProvider>
       </body>
     </html>
