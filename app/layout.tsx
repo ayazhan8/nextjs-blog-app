@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./components/theme-provider";
 import { ModalsProvider } from "@/context/modals-context";
 import Modal from "./components/Modal";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default function RootLayout({
             <main className="flex-grow">
               <div className="max-w-7xl mx-auto px-4">{children}</div>
             </main>
-
+            <Footer />
             <Modal />
           </ModalsProvider>
         </ThemeProvider>
