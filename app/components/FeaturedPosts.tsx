@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { client, urlFor } from "@/app/lib/sanity";
 import { simpleBlogCard } from "@/app/lib/interface";
 import { Badge } from "@/components/ui/badge";
-
+import { format } from "date-fns";
 
 export const revalidate = 30;
 
@@ -36,29 +36,32 @@ export default async function FeaturedPosts() {
       <div className="">
         {data.map((post, idx) => (
           <Card key={idx} className="flex mb-8 flex-col md:flex-row">
-            
             <Image
               src={urlFor(post.titleImage).url()}
               alt="image"
               width={512}
               height={384}
               className="object-cover w-full md:w-1/2 h-auto p-4 max-h-[384px]"
+              priority
             />
 
             <CardContent className="p-4">
-
               <div className="flex items-center">
-                <span className="flex items-center">
-                  {post.date.slice(0, 10)}
+                <span className="flex items-center text-sm">
+                  {format(post.date, "MMM dd, yyyy")}
                 </span>
-                <Badge className="ml-2 text-center">{post.category.name}</Badge>
+                <Badge className="ml-2 text-center dark:text-white dark:font-light">
+                  {post.category.name}
+                </Badge>
               </div>
 
-              <h3 className="text-lg line-clamp-2 font-bold mt-2">{post.title}</h3>
+              <h3 className="text-lg line-clamp-2 font-bold mt-2">
+                {post.title}
+              </h3>
               <p className="line-clamp-3 text-sm mt-2 text-gray-600 dark:text-gray-300">
                 {post.smallDescription}
               </p>
-              <Button asChild className="mt-7">
+              <Button asChild className="mt-7 dark:text-white">
                 <Link href={`/blog/${post.currentSlug}`}>Read More</Link>
               </Button>
             </CardContent>
