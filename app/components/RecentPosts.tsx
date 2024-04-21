@@ -7,6 +7,7 @@ import React from "react";
 import Image from "next/image";
 import PaginationControls from "./PaginationControls";
 import { Badge } from "@/components/ui/badge";
+import { format } from "date-fns";
 
 export const revalidate = 30;
 
@@ -36,7 +37,7 @@ export default async function RecentPosts({
   const data: simpleBlogCard[] = await getData();
   const start = (Number(page) - 1) * Number(perPage);
   const end = start + Number(perPage);
-  const entries = data.slice(start, end);
+  const entries = perPage && page ? data.slice(start, end) : data;
 
   return (
     <>
@@ -52,30 +53,34 @@ export default async function RecentPosts({
               height={300}
               className="rounded-t-lg w-full h-60 object-cover"
             />
-            
+
             <CardContent className="mt-5">
               <div className="flex items-center">
-                <span className="flex items-center">
-                  {post.date.slice(0, 10)}
+                <span className="flex items-center text-sm">
+                  {format(post.date, "MMM dd, yyyy")}
                 </span>
-                <Badge className="ml-2 text-center">{post.category?.name}</Badge>
+                <Badge className="ml-2 text-center dark:text-white dark:font-light">
+                  {post.category?.name}
+                </Badge>
               </div>
-              <h3 className="text-lg line-clamp-2 font-bold mt-2">{post.title}</h3>
+              <h3 className="text-lg line-clamp-2 font-bold mt-2">
+                {post.title}
+              </h3>
               <p className="line-clamp-3 text-sm mt-2 text-gray-600 dark:text-gray-300">
                 {post.smallDescription}
               </p>
-              <Button asChild className="mt-7">
+              <Button asChild className="mt-7 dark:text-white">
                 <Link href={`/blog/${post.currentSlug}`}>Read More</Link>
               </Button>
             </CardContent>
           </Card>
         ))}
       </div>
-      <PaginationControls 
+      <PaginationControls
         hasNextPage={end < data.length}
         hasPrevPage={start > 0}
         itemsCount={data.length}
-        />
+      />
     </>
   );
 }
