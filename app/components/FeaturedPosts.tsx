@@ -41,7 +41,7 @@ export default async function FeaturedPosts() {
               alt="image"
               width={512}
               height={384}
-              className="object-cover w-full md:w-1/2 h-auto p-4 max-h-[384px]"
+              className="object-cover w-full md:w-1/2 h-auto p-4 max-h-[250px]"
               priority
             />
 

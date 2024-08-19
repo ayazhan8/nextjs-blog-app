@@ -1,7 +1,13 @@
-import React from 'react'
+import Categories from "../components/Categories";
 
-export default function page() {
-  return (
-    <div>page</div>
-  )
-}
+const CategoriesPage = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "4";
+  return <Categories />;
+};
+
+export default CategoriesPage;

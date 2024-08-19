@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -17,51 +17,57 @@ interface PaginationControlsProps {
   hasNextPage: boolean;
   hasPrevPage: boolean;
   itemsCount: number;
+  perPage: number;
 }
 
 const PaginationControls: FC<PaginationControlsProps> = ({
   hasNextPage,
   hasPrevPage,
   itemsCount,
+  perPage,
 }) => {
   const searchParams = useSearchParams();
   const page = searchParams.get("page") ?? "1";
-  const per_page = Number(searchParams.get("per_page") ?? "2");
-  const pagesCount = Math.ceil(itemsCount / per_page);
+  const pagesCount = Math.ceil(itemsCount / perPage);
   const pagesArr = Array.from(Array(pagesCount).keys());
 
   return (
     <div className="">
       <Pagination>
         <PaginationContent>
-          <PaginationItem>
+          <PaginationItem className="list-none">
             <PaginationPrevious
-            className={clsx({
-              'hidden':  !hasPrevPage
-            })}
-              href={`/?page=${Number(page) - 1}&per_page=${per_page}`}
+              className={clsx({
+                hidden: !hasPrevPage,
+              })}
+              href={`/?page=${Number(page) - 1}&per_page=${perPage}`}
             />
           </PaginationItem>
-          <PaginationItem>
+          <PaginationItem className="list-none">
             <div className="flex items-center justify-center">
               {pagesArr.map((index: number) => (
-                <PaginationLink href={`/?page=${index+1}&per_page=${per_page}`}>{index + 1}</PaginationLink>
+                <PaginationLink
+                  key={index}
+                  href={`?page=${index + 1}&per_page=${perPage}`}
+                >
+                  {index + 1}
+                </PaginationLink>
               ))}
             </div>
           </PaginationItem>
           <PaginationItem
             className={clsx({
-              'hidden': pagesCount < 5,
+              hidden: pagesCount < 5,
             })}
           >
             <PaginationEllipsis />
           </PaginationItem>
-          <PaginationItem>
+          <PaginationItem className="list-none">
             <PaginationNext
-            className={clsx({
-              'hidden':  !hasNextPage
-            })}
-              href={`/?page=${Number(page) + 1}&per_page=${per_page}`}
+              className={clsx({
+                hidden: !hasNextPage,
+              })}
+              href={`?page=${Number(page) + 1}&per_page=${perPage}`}
             />
           </PaginationItem>
         </PaginationContent>

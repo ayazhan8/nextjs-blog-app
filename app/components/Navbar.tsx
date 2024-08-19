@@ -61,7 +61,6 @@ export default function Navbar() {
     //   }`
     // );
     const searchResults = await axios.get(`/api/search?filter=${searchText}`);
-    console.log(searchResults);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,41 +92,21 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center justify-between">
-            {!isSearching && <ModeToggle />}
+            <ModeToggle />
+            <Link href={"/search"}>
+              <Search className="h-8 w-12 px-3.5" />
+            </Link>
 
-            <form
-              action="submit"
-              className="relative w-max mx-auto"
+            <Button
+              variant="ghost"
+              size="icon"
+              className="sm:hidden"
               onClick={() => {
-                setSearching(true);
+                setActiveModal("mobive-nav");
               }}
-              ref={divRef}
-              onSubmit={handleSubmit}
             >
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={handleChange}
-                className="relative peer z-10 bg-transparent w-12 h-12 focus:rounded-full focus:border 
-                            focus:w-full focus:border-blue-300 cursor-pointer outline-none focus:cursor-text
-                            pl-8 "
-              />
-              <Search className="absolute inset-y-0 right-0 my-auto h-8 w-12 px-3.5 border-l border-transparent peer-focus:border-blue-300 peer-focus:stroke-blue-300" />
-            </form>
-
-            {!isSearching && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="sm:hidden"
-                onClick={() => {
-                  setActiveModal("mobive-nav");
-                }}
-              >
-                <Menu />
-              </Button>
-            )}
+              <Menu />
+            </Button>
           </div>
         </div>
       </nav>

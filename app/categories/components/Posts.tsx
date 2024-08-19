@@ -3,55 +3,57 @@ import { client, urlFor } from "@/app/lib/sanity";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
-import PaginationControls from "./PaginationControls";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
+import PaginationControls from "@/app/components/PaginationControls";
 
 export const revalidate = 30;
 
-async function getData() {
+async function getPostsByCategory(category: string) {
   const query = `
-    *[_type == 'blog'] {
-      title,
-      smallDescription,
-      titleImage,
-      date,
-      category->{name},
+    *[_type == 'blog' && category->name == "${category}"] {
+    title,
+    smallDescription,
+    titleImage,
+    date,
+    category->{name},
       "currentSlug": slug.current,
-    }`;
-
+    
+  }`;
   const data = await client.fetch(query);
-
   return data;
 }
 
-export default async function RecentPosts({
+export default async function Posts({
+  category,
   page,
   perPage,
 }: {
+  category: string;
   page: string | string[];
   perPage: string | string[];
 }) {
-  const data: simpleBlogCard[] = await getData();
+  const data: simpleBlogCard[] = await getPostsByCategory(
+    typeof category == "string" ? category : ""
+  );
   const start = (Number(page) - 1) * Number(perPage);
   const end = start + Number(perPage);
   const entries = perPage && page ? data.slice(start, end) : data;
 
   return (
-    <>
-      <h2 className="font-bold text-xl md:text-2xl">Recent Posts</h2>
+    <div className="mt-8 md:mt-12 px-10">
+      <h2 className="font-bold text-xl md:text-2xl mb-4">Posts</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
         {entries.map((post, idx) => (
-          <Card key={idx} className="flex flex-col my-4">
+          <Card key={idx} className="flex flex-col my-4 md:flex-row">
             <Image
               src={urlFor(post.titleImage).url()}
               alt="image"
-              width={400}
-              height={300}
-              className="rounded-t-lg w-full h-60 object-cover"
+              width={300}
+              height={200}
+              className="rounded-l-lg w-full max-w-[300px] max-h-[250px] object-cover"
             />
 
             <CardContent className="mt-5">
@@ -82,6 +84,6 @@ export default async function RecentPosts({
         itemsCount={data.length}
         perPage={Number(perPage)}
       />
-    </>
+    </div>
   );
 }

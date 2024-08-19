@@ -4,11 +4,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="mt-20 bg-[#ededed] dark:bg-[#26344d] py-10 px-8">
-      <p className="flex items-center justify-center mb-6 text-sm font-extralight text-center">
-        Explore the world of electrical engineering with Temirlan, a seasoned
-        professional sharing valuable insights and experiences. Join the journey
-        to spark innovation and illuminate career paths.
-      </p>
+      {/* <p className="flex items-center justify-center mb-6 text-sm font-extralight text-center"></p> */}
 
       <div className="flex justify-center items-center">
         <a

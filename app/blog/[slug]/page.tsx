@@ -1,8 +1,10 @@
 import Categories from "@/app/components/Categories";
 import SupportBlock from "@/app/components/SupportBlock";
+import { getImageDimensions } from "@sanity/asset-utils";
 
 import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
+import urlBuilder from "@sanity/image-url";
 import Image from "next/image";
 
 export const revalidate = 30;
@@ -20,6 +22,23 @@ async function getData(slug: string) {
   return data;
 }
 
+const SampleImageComponent = ({ value }: any) => {
+  const { width, height } = getImageDimensions(value);
+
+  return (
+    <Image
+      src={urlFor(value).url()}
+      alt={value.alt || " "}
+      loading="lazy"
+      style={{
+        aspectRatio: width / height,
+      }}
+      width={width}
+      height={height}
+    />
+  );
+};
+
 export default async function BlogArticle({
   params,
 }: {
@@ -28,7 +47,7 @@ export default async function BlogArticle({
   const data = await getData(params.slug);
 
   return (
-    <div className="flex justify-center mx-4 my-8 gap-8 flex-col sm:flex-row">
+    <div className="flex justify-center mx-4 my-8 gap-8 flex-col lg:flex-row">
       <div className="flex-1">
         <div className="mt-8 w-full">
           <h1>
@@ -36,7 +55,7 @@ export default async function BlogArticle({
               Blog
             </span>
             <span className="mt-2 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl">
-              {data.title}
+              {data?.title}
             </span>
           </h1>
 
@@ -46,15 +65,22 @@ export default async function BlogArticle({
             height={600}
             alt="Title Image"
             priority
-            className="rounded-lg mt-8 border w-full"
+            className="rounded-lg mt-8 border w-full max-w-xl mx-auto"
           />
 
-          <div className="mt-16 prose-blue prose-lg dark:prose-invert">
-            <PortableText value={data.content} />
+          <div className="mt-16 prose-blue prose-lg dark:prose-invert list-disc list-inside">
+            <PortableText
+              value={data.content}
+              components={{
+                types: {
+                  image: SampleImageComponent,
+                },
+              }}
+            />
           </div>
         </div>
       </div>
-      <div className="mx-12 flex-shrink-0 max-w-xs">
+      <div className="flex-shrink-0 max-w-xs mt-6 md:mt-14">
         <SupportBlock />
         <Categories />
       </div>

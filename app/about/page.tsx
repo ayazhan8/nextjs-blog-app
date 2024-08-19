@@ -7,7 +7,7 @@ import { Linkedin, Mail } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="py-20 text-center flex items-center flex-col md:flex-row md:pt-40">
+    <div className="py-20 text-center flex items-center flex-col md:pt-30">
       <div className="shrink-0">
         <Image
           src="/avatar.jpg"
@@ -20,18 +20,124 @@ export default function AboutPage() {
         />
       </div>
 
-      <div className="md:ml-20 mt-10 md:mt-0 lg:text-left">
+      <div className="md:mx-20 mt-10 md:mt-0 lg:text-left">
         <Heading>About Me</Heading>
         <p>
-          As an accomplished electrical engineer holding both a BSc and MSc, I
-          invite you to delve into my blog where I eloquently share my
-          experiences as a junior professional and offer a glimpse into my
-          tenure at a prestigious corporation. Embark on a journey with me as I
-          navigate the intricate realm of engineering, offering valuable
-          insights and wisdom along the way.
+          My name is Temirlan Myrzakhmet. I was born and raised in Almaty,
+          Kazakhstan. <br />
+          <br />
+          At the age of 18, I moved to the United Kingdom to pursue education
+          and a career in engineering. I chose electrical and electronic
+          engineering because the knowledge and skills acquired studying this
+          subject can be applied across diverse sectors and industries,
+          including energy, utilities, construction, manufacturing,
+          transportation, and more. <br />
+          <br />I graduated from the University of Manchester with a BEng
+          (Honours) degree in Electrical & Electronic Engineering and from
+          Imperial College London with an MSc degree in Future Power Networks.
         </p>
 
-        <div className="mt-20 flex items-center justify-center lg:justify-normal">
+        <div className="flex mt-4">
+          <Image
+            src="/uom_logo.jpeg"
+            alt=""
+            width="100"
+            height="60"
+            quality="95"
+            priority={true}
+            className="mr-6"
+          />
+          <Image
+            src="/imperial_logo.svg"
+            alt=""
+            width="100"
+            height="60"
+            quality="95"
+            priority={true}
+            className=""
+          />
+        </div>
+
+        <section>
+          <h2 className="text-lg font-semibold pt-6 pb-3">
+            Career Highlights:
+          </h2>
+          <div>
+            <li>2020 - 2022: BP - Graduate Electrical Engineer</li>
+            <li>2023 - Present: National Grid - Power System Engineer</li>
+          </div>
+
+          <div className="flex mt-4">
+            <Image
+              src="/bp_logo.jpeg"
+              alt=""
+              width="80"
+              height="80"
+              quality="95"
+              priority={true}
+              className="mr-6"
+            />
+            <Image
+              src="/ng_logo.jpeg"
+              alt=""
+              width="300"
+              height="40"
+              quality="95"
+              priority={true}
+              className=""
+            />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold pt-6 pb-3">
+            Getting to know blog’s content and its audience
+          </h2>
+          <p>
+            Our world is beautiful and full of wonders. It has the power to
+            inspire extraordinary inventions, move people to create exquisite
+            art and poetry, and simply evoke feelings of appreciation for the
+            opportunity to experience it.
+            <br />
+            <br />
+            However, the environment of our planet has been adversely affected
+            primarily by human activities in the past and present. These
+            negative changes destroy ecosystems, biodiversity, livelihoods, and
+            sometimes even people’s lives.
+            <br />
+            <br />
+            This blog is a place where you can learn about climate change, and
+            what solutions are available in order to tackle this very important
+            problem. Furthermore, I will be sharing knowledge about electrical
+            engineering, sustainable technologies / solutions, electrical
+            systems and renewable energy systems.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold pt-6 pb-3">Mission</h2>
+          <p>
+            Our world is beautiful and full of wonders. It has the power to
+            inspire extraordinary inventions, move people to create exquisite
+            art and poetry, and simply evoke feelings of appreciation for the
+            opportunity to experience it.
+            <br />
+            <br />
+            However, the environment of our planet has been adversely affected
+            primarily by human activities in the past and present. These
+            negative changes destroy ecosystems, biodiversity, livelihoods, and
+            sometimes even people’s lives.
+            <br />
+            <br />
+            This blog is a place where you can learn about climate change, and
+            what solutions are available in order to tackle this very important
+            problem. Furthermore, I will be sharing knowledge about electrical
+            engineering, sustainable technologies / solutions, electrical
+            systems and renewable energy systems.
+          </p>
+        </section>
+
+        <div className="mt-10 flex items-center justify-center lg:justify-normal">
           <span className="mr-4">Contact me on:</span>
           <a
             className="bg-white text-gray-700 p-3 flex items-center rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition border border- border-black/50 dark:bg-white/10 dark:border-none dark:text-white/60 mr-2"
