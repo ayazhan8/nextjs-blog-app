@@ -72,7 +72,7 @@ export default function Navbar() {
       <nav className="w-full relative flex items-center justify-between px-10 py-5 gap-4 max-w-7xl mx-auto">
         <div>
           <Link href="/" className="font-bold text-xl lg:text-3xl">
-            Temirlan's <span className="text-primary">Blog</span>
+            Temirlan&apos;s <span className="text-primary">Blog</span>
           </Link>
         </div>
 

@@ -51,6 +51,7 @@ export default async function Categories() {
         <div className="flex justify-center">
           {categories.map((category, idx) => (
             <Badge
+              key={category.name}
               variant="outline"
               className={`${getRandomColor()} mx-2 my-1 px-3 py-2 border-none`}
             >
