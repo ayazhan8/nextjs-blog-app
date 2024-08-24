@@ -17,7 +17,7 @@ const Category = ({
 
   return (
     <div className="">
-      <Posts category={deslugify(params.slug)} page={"1"} perPage={"2"} />
+      <Posts category={deslugify(params.slug)} perPage={"4"} />
     </div>
   );
 };

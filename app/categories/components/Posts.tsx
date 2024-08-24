@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
-import PaginationControls from "@/app/components/PaginationControls";
 
 export const revalidate = 30;
 
@@ -27,25 +26,27 @@ async function getPostsByCategory(category: string) {
 
 export default async function Posts({
   category,
-  page,
   perPage,
 }: {
   category: string;
-  page: string | string[];
   perPage: string | string[];
 }) {
-  const data: simpleBlogCard[] = await getPostsByCategory(
+  const entries: simpleBlogCard[] = await getPostsByCategory(
     typeof category == "string" ? category : ""
   );
-  const start = (Number(page) - 1) * Number(perPage);
-  const end = start + Number(perPage);
-  const entries = perPage && page ? data.slice(start, end) : data;
+
+  if (entries.length == 0)
+    return (
+      <div className="mt-8 md:mt-12 px-10 mx-auto">
+        <h2 className="font-bold text-xl md:text-2xl">No posts found</h2>
+      </div>
+    );
 
   return (
     <div className="mt-8 md:mt-12 px-10">
       <h2 className="font-bold text-xl md:text-2xl mb-4">Posts</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-1">
         {entries.map((post, idx) => (
           <Card key={idx} className="flex flex-col my-4 md:flex-row">
             <Image
@@ -78,12 +79,6 @@ export default async function Posts({
           </Card>
         ))}
       </div>
-      <PaginationControls
-        hasNextPage={end < data.length}
-        hasPrevPage={start > 0}
-        itemsCount={data.length}
-        perPage={Number(perPage)}
-      />
     </div>
   );
 }
