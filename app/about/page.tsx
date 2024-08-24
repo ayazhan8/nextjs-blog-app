@@ -117,23 +117,18 @@ export default function AboutPage() {
         <section>
           <h2 className="text-lg font-semibold pt-6 pb-3">Mission</h2>
           <p>
-            Our world is beautiful and full of wonders. It has the power to
-            inspire extraordinary inventions, move people to create exquisite
-            art and poetry, and simply evoke feelings of appreciation for the
-            opportunity to experience it.
+            I hope that after reading a single post or exploring the entire
+            blog, you will be able to say, 'I've learned something new,' 'I now
+            have a better understanding of the issue,' 'This post has clarified
+            my misconceptions,' or 'I liked it and want to delve deeper into a
+            specific topic.' On the other had, if there is anything I may have
+            overlooked, explained inadequately, or made a mistake in, I welcome
+            your feedback, ideas, or criticism.
             <br />
             <br />
-            However, the environment of our planet has been adversely affected
-            primarily by human activities in the past and present. These
-            negative changes destroy ecosystems, biodiversity, livelihoods, and
-            sometimes even people’s lives.
-            <br />
-            <br />
-            This blog is a place where you can learn about climate change, and
-            what solutions are available in order to tackle this very important
-            problem. Furthermore, I will be sharing knowledge about electrical
-            engineering, sustainable technologies / solutions, electrical
-            systems and renewable energy systems.
+            Moreover, I believe that raising awareness, offering reminders, and
+            sharing knowledge are beneficial actions that can have a positive
+            impact on the world around us.
           </p>
         </section>
 
