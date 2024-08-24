@@ -1,8 +1,5 @@
 import Heading from "@/components/heading";
-import React from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Linkedin, Mail } from "lucide-react";
 
 export default function AboutPage() {
@@ -118,10 +115,11 @@ export default function AboutPage() {
           <h2 className="text-lg font-semibold pt-6 pb-3">Mission</h2>
           <p>
             I hope that after reading a single post or exploring the entire
-            blog, you will be able to say, 'I've learned something new,' 'I now
-            have a better understanding of the issue,' 'This post has clarified
-            my misconceptions,' or 'I liked it and want to delve deeper into a
-            specific topic.' On the other had, if there is anything I may have
+            blog, you will be able to say, &apos;I&apos;ve learned something
+            new,&apos; &apos;I now have a better understanding of the
+            issue&apos;, &apos;This post has clarified my misconceptions&apos;,
+            or &apos;I liked it and want to delve deeper into a specific
+            topic&apos;. On the other had, if there is anything I may have
             overlooked, explained inadequately, or made a mistake in, I welcome
             your feedback, ideas, or criticism.
             <br />
