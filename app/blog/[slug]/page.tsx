@@ -1,10 +1,8 @@
 import Categories from "@/app/components/Categories";
 import SupportBlock from "@/app/components/SupportBlock";
 import { getImageDimensions } from "@sanity/asset-utils";
-
 import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
-import urlBuilder from "@sanity/image-url";
 import Image from "next/image";
 
 export const revalidate = 30;
